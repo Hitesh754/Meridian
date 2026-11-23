@@ -1,0 +1,32 @@
+{
+  "name": "meridian",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.6.0",
+  "scripts": {
+    "dev:stack": "node scripts/compose.mjs up",
+    "dev:stack:down": "node scripts/compose.mjs down",
+    "dev:stack:reset": "node scripts/compose.mjs reset",
+    "build": "tsc -p packages/contracts/tsconfig.json && tsc -p packages/design-tokens/tsconfig.json && tsc -p apps/api/tsconfig.json",
+    "db:migrate": "pnpm --filter @meridian/api db:migrate",
+    "db:migrate:down": "pnpm --filter @meridian/api db:migrate:down",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "typecheck": "tsc -p packages/contracts/tsconfig.json --noEmit && tsc -p packages/design-tokens/tsconfig.json --noEmit && tsc -p apps/api/tsconfig.json --noEmit && tsc -p apps/mobile/tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:integration": "vitest run --config vitest.integration.config.ts",
+    "verify": "node scripts/verify.mjs"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.6.8",
+    "typescript": "~6.0.3",
+    "vitest": "5.1.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "glob": ">=14.0.2",
+      "minimatch": ">=11.0.1"
+    }
+  }
+}

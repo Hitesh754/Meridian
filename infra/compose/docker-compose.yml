@@ -1,0 +1,80 @@
+name: meridian
+
+services:
+  postgres:
+    profiles: ["core"]
+    image: postgis/postgis:16-3.4
+    container_name: meridian-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-meridian_dev}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-meridian_dev_secret}
+      POSTGRES_DB: ${POSTGRES_DB:-meridian}
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - meridian-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 3s
+      timeout: 3s
+      retries: 10
+      start_period: 5s
+    mem_limit: 512m
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+
+  migrate:
+    profiles: ["core"]
+    build:
+      context: ../..
+      dockerfile: apps/api/Dockerfile
+      target: runner
+    container_name: meridian-migrate
+    restart: "no"
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: postgres://${POSTGRES_USER:-meridian_dev}:${POSTGRES_PASSWORD:-meridian_dev_secret}@postgres:5432/${POSTGRES_DB:-meridian}
+    command: ["node", "dist/db/migrate-cli.js", "up"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  api:
+    profiles: ["core"]
+    build:
+      context: ../..
+      dockerfile: apps/api/Dockerfile
+      target: runner
+    container_name: meridian-api
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 8080
+      HOST: 0.0.0.0
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      DATABASE_URL: postgres://${POSTGRES_USER:-meridian_dev}:${POSTGRES_PASSWORD:-meridian_dev_secret}@postgres:5432/${POSTGRES_DB:-meridian}
+    ports:
+      - "127.0.0.1:8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:8080/readyz').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+    mem_limit: 256m
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+
+volumes:
+  meridian-pgdata:
+    name: meridian-pgdata

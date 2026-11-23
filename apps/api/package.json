@@ -1,0 +1,29 @@
+{
+  "name": "@meridian/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js",
+    "dev": "node --watch src/index.ts",
+    "db:migrate": "node dist/db/migrate-cli.js up",
+    "db:migrate:down": "node dist/db/migrate-cli.js down"
+  },
+  "dependencies": {
+    "@meridian/contracts": "workspace:*",
+    "dotenv": "^16.4.7",
+    "fastify": "5.12.8",
+    "node-pg-migrate": "9.0.0",
+    "pg": "8.23.1",
+    "pino": "^9.6.0",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.0",
+    "@types/pg": "^8.11.11",
+    "typescript": "~6.0.3"
+  }
+}

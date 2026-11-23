@@ -1,0 +1,21 @@
+{
+  "expo": {
+    "name": "Meridian",
+    "slug": "meridian",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "scheme": "meridian",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "app.meridian.mobile"
+    },
+    "android": {
+      "package": "app.meridian.mobile"
+    },
+    "plugins": ["expo-router"],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
