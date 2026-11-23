@@ -144,3 +144,83 @@ export const themes = {
 } as const;
 
 export type ThemeMode = keyof typeof themes;
+
+export interface MapColorTokens {
+  land: string;
+  water: string;
+  greenery: string;
+  building: string;
+  roadMotorway: string;
+  roadMotorwayCasing: string;
+  roadPrimary: string;
+  roadSecondary: string;
+  roadLocal: string;
+  roadCasing: string;
+  roadLabel: string;
+  roadLabelHalo: string;
+  placeLabel: string;
+  placeLabelHalo: string;
+  poiIcon: string;
+  poiLabel: string;
+  routeLine: string;
+  routeCasing: string;
+  userLocationPuck: string;
+  userLocationHalo: string;
+  alertPothole: string;
+  stayHotel: string;
+}
+
+export const lightMapColors: MapColorTokens = {
+  land: '#F8F9FA',
+  water: '#C8DCED',
+  greenery: '#E2F0D9',
+  building: '#ECEFF1',
+  roadMotorway: '#F59E0B',
+  roadMotorwayCasing: '#D97706',
+  roadPrimary: '#FFFFFF',
+  roadSecondary: '#FFFFFF',
+  roadLocal: '#FFFFFF',
+  roadCasing: '#CBD5E1',
+  roadLabel: '#334155',
+  roadLabelHalo: '#FFFFFF',
+  placeLabel: '#0F172A',
+  placeLabelHalo: '#FFFFFF',
+  poiIcon: '#94A3B8',
+  poiLabel: '#64748B',
+  routeLine: '#2563EB',
+  routeCasing: '#1D4ED8',
+  userLocationPuck: '#0284C7',
+  userLocationHalo: 'rgba(2, 132, 199, 0.25)',
+  alertPothole: '#EF4444',
+  stayHotel: '#8B5CF6',
+};
+
+export const darkMapColors: MapColorTokens = {
+  land: '#0F172A',
+  water: '#0B2545',
+  greenery: '#132A22',
+  building: '#1E293B',
+  roadMotorway: '#F59E0B',
+  roadMotorwayCasing: '#B45309',
+  roadPrimary: '#334155',
+  roadSecondary: '#243248',
+  roadLocal: '#1E293B',
+  roadCasing: '#090D16',
+  roadLabel: '#E2E8F0',
+  roadLabelHalo: '#0F172A',
+  placeLabel: '#F8FAFC',
+  placeLabelHalo: '#0F172A',
+  poiIcon: '#64748B',
+  poiLabel: '#94A3B8',
+  routeLine: '#38BDF8',
+  routeCasing: '#0284C7',
+  userLocationPuck: '#38BDF8',
+  userLocationHalo: 'rgba(56, 189, 248, 0.25)',
+  alertPothole: '#F87171',
+  stayHotel: '#A78BFA',
+};
+
+export const mapThemes = {
+  light: lightMapColors,
+  dark: darkMapColors,
+} as const;

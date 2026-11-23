@@ -39,3 +39,12 @@
 - **Context:** Future scaling may require message brokers (NATS), discrete global grid indexing (Uber H3), and automated pothole detection via camera computer vision (ML).
 - **Decision:** Abstract event publication into an `EventBus` interface and location indexing into a spatial query service.
 - **Rationale:** Allows dropping in NATS or H3 later without modifying core domain entities or HTTP routes.
+
+## ADR-009: Client Installation ID for Free-Tier Usage Accounting
+- **Context:** Mapbox free tier limits mobile SDK usage to 100 Monthly Active Users (MAUs). When backend usage tracking arrives in Prompt B2, the API needs an anonymous client identifier to count unique active devices per monthly billing cycle without collecting personally identifiable information (PII) or accessing restricted hardware IDs (IMEI, MAC, Android ID).
+- **Decision:** Generate an anonymous UUIDv4 per client instance, stored securely in the device OS keychain/Keystore via `expo-secure-store` (`getOrCreateInstallationId()`).
+- **Rationale:**
+  1. Complete privacy: pure random UUIDv4, zero device fingerprinting, zero hardware IDs, zero PII.
+  2. Survives standard app restarts and updates while resetting cleanly if the user uninstalls the app or wipes application data.
+  3. Prepares the client contract for Prompt B2's backend usage guard, which registers active installation IDs and stops navigation session initiation if approaching the 100 MAU free tier ceiling.
+

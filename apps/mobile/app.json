@@ -11,9 +11,24 @@
       "bundleIdentifier": "app.meridian.mobile"
     },
     "android": {
-      "package": "app.meridian.mobile"
+      "package": "app.meridian.mobile",
+      "permissions": ["ACCESS_FINE_LOCATION", "ACCESS_COARSE_LOCATION"]
     },
-    "plugins": ["expo-router"],
+    "plugins": [
+      "expo-router",
+      [
+        "@rnmapbox/maps",
+        {
+          "RNMapboxMapsImpl": "mapbox"
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow Meridian to access your location for turn-by-turn road navigation and safety alerts."
+        }
+      ]
+    ],
     "experiments": {
       "typedRoutes": true
     }

@@ -1,0 +1,44 @@
+========================================================================
+Meridian - Road-Aware Travel
+Copyright 2026 Meridian Contributors
+========================================================================
+
+This product includes software developed by third-party projects and datasets
+governed by open-source and proprietary licenses:
+
+1. Mapbox Maps SDK & Data
+   - Cartography, vector tiles, geocoding and routing data © Mapbox
+     https://www.mapbox.com/
+   - Mapbox Terms of Service: https://www.mapbox.com/legal/tos/
+   - Mapbox Legal & Attribution Notices: https://www.mapbox.com/about/maps/
+   - Under Mapbox Terms of Service, all Mapbox data (vector tiles, raster tiles,
+     geocoding, search, and directions) must be rendered exclusively on Mapbox maps.
+
+2. OpenStreetMap
+   - Map data © OpenStreetMap contributors
+   - Data available under the Open Database License (ODbL):
+     https://www.openstreetmap.org/copyright
+   - Cartography in Mapbox styles licensed under Creative Commons
+     Attribution-ShareAlike 2.0 (CC-BY-SA 2.0).
+
+3. @rnmapbox/maps
+   - Community-supported Mapbox Maps SDK for React Native
+   - Licensed under the MIT License
+   - https://github.com/rnmapbox/maps
+
+4. React Native & Expo
+   - Copyright (c) Meta Platforms, Inc. and 650 Industries, Inc.
+   - Licensed under the MIT License
+   - https://reactnative.dev/
+   - https://expo.dev/
+
+5. Fastify
+   - Fast and low overhead web framework for Node.js
+   - Licensed under the MIT License
+   - https://fastify.dev/
+
+6. PostgreSQL & PostGIS
+   - PostgreSQL: Copyright (c) 1996-2024, The PostgreSQL Global Development Group
+     Licensed under the PostgreSQL License.
+   - PostGIS: Copyright (c) Refractions Research, PostGIS contributors
+     Licensed under the GNU General Public License v2 (GPLv2).

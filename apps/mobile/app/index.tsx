@@ -7,6 +7,7 @@ import {
   spacing,
   typography,
 } from '@meridian/design-tokens';
+import { useRouter } from 'expo-router';
 import { useCallback, useEffect, useState } from 'react';
 import {
   ActivityIndicator,
@@ -27,6 +28,7 @@ type ReadinessState =
   | { kind: 'unreachable'; error: string };
 
 export default function ReadinessScreen() {
+  const router = useRouter();
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
   const [state, setState] = useState<ReadinessState>({ kind: 'loading' });
 
@@ -217,6 +219,44 @@ export default function ReadinessScreen() {
         >
           <Text style={[styles.actionButtonText, { color: colors.primaryText }]}>
             Recheck Readiness
+          </Text>
+        </TouchableOpacity>
+
+        {/* Mapbox Dev Verification Navigation */}
+        <TouchableOpacity
+          style={[
+            styles.actionButton,
+            {
+              backgroundColor: colors.surface,
+              borderColor: colors.border,
+              borderWidth: 1,
+              marginTop: spacing.sm,
+            },
+          ]}
+          onPress={() => router.push('/dev/map-check')}
+          activeOpacity={0.8}
+        >
+          <Text style={[styles.actionButtonText, { color: colors.textPrimary }]}>
+            🗺 Open Map Verification (/dev/map-check)
+          </Text>
+        </TouchableOpacity>
+
+        {/* Legal & About Screen */}
+        <TouchableOpacity
+          style={[
+            styles.actionButton,
+            {
+              backgroundColor: colors.surface,
+              borderColor: colors.border,
+              borderWidth: 1,
+              marginTop: spacing.sm,
+            },
+          ]}
+          onPress={() => router.push('/about')}
+          activeOpacity={0.8}
+        >
+          <Text style={[styles.actionButtonText, { color: colors.textSecondary }]}>
+            ⚖ Legal & Attribution Notices (/about)
           </Text>
         </TouchableOpacity>
       </ScrollView>

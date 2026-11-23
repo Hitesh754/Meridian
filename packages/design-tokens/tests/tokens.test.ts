@@ -2,7 +2,11 @@ import { describe, expect, it } from 'vitest';
 import {
   type ColorTokens,
   darkColors,
+  darkMapColors,
   lightColors,
+  lightMapColors,
+  type MapColorTokens,
+  mapThemes,
   motion,
   radii,
   spacing,
@@ -156,6 +160,56 @@ describe('Design Tokens: Colors and Accessibility (WCAG AA)', () => {
     it('meets AA for successText on success', () => {
       const ratio = getContrastRatio(darkColors.successText, darkColors.success);
       expect(ratio).toBeGreaterThanOrEqual(4.5);
+    });
+  });
+
+  describe('Map Color Tokens & Cartographic Accessibility', () => {
+    const mapColorKeys: (keyof MapColorTokens)[] = [
+      'land',
+      'water',
+      'greenery',
+      'building',
+      'roadMotorway',
+      'roadMotorwayCasing',
+      'roadPrimary',
+      'roadSecondary',
+      'roadLocal',
+      'roadCasing',
+      'roadLabel',
+      'roadLabelHalo',
+      'placeLabel',
+      'placeLabelHalo',
+      'poiIcon',
+      'poiLabel',
+      'routeLine',
+      'routeCasing',
+      'userLocationPuck',
+      'userLocationHalo',
+      'alertPothole',
+      'stayHotel',
+    ];
+
+    it('contains identical map token keys across light and dark map themes', () => {
+      for (const key of mapColorKeys) {
+        expect(lightMapColors[key]).toBeDefined();
+        expect(darkMapColors[key]).toBeDefined();
+        expect(mapThemes.light[key]).toBe(lightMapColors[key]);
+        expect(mapThemes.dark[key]).toBe(darkMapColors[key]);
+      }
+    });
+
+    it('ensures high contrast for labels against land in light map theme (>= 4.5:1)', () => {
+      const placeRatio = getContrastRatio(lightMapColors.placeLabel, lightMapColors.land);
+      expect(placeRatio).toBeGreaterThanOrEqual(4.5);
+      const roadRatio = getContrastRatio(lightMapColors.roadLabel, lightMapColors.roadLocal);
+      expect(roadRatio).toBeGreaterThanOrEqual(4.5);
+    });
+
+    it('ensures high contrast for labels against land in dark map theme (>= 4.5:1)', () => {
+      const placeRatio = getContrastRatio(darkMapColors.placeLabel, darkMapColors.land);
+      expect(placeRatio).toBeGreaterThanOrEqual(4.5);
+      const roadRatio = getContrastRatio(darkMapColors.roadLabel, darkMapColors.roadLocal);
+      expect(roadRatio).toBeGreaterThanOrEqual(4.5);
     });
   });
 });
