@@ -48,7 +48,7 @@ if (-not (Test-Path $gradleDir)) {
 
 # Append the download token to ~/.gradle/gradle.properties
 $gradleProps = Join-Path $gradleDir "gradle.properties"
-Add-Content -Path $gradleProps -Value "`nMAPBOX_DOWNLOADS_TOKEN=sk.YOUR_SECRET_TOKEN_HERE"
+Add-Content -Path $gradleProps -Value "`nMAPBOX_DOWNLOADS_TOKEN=<YOUR_SECRET_TOKEN_HERE>"
 
 # Verify file exists outside repository
 Get-Content $gradleProps | Select-String "MAPBOX_DOWNLOADS_TOKEN"
